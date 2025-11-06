@@ -2,6 +2,7 @@ package com.jspiders.ems.services;
 
 import com.jspiders.ems.data.EmployeDTO;
 import com.jspiders.ems.data.EmployeeDAO;
+import com.jspiders.ems.util.EmployeeDtoValidator;
 
 import java.util.Scanner;
 
@@ -33,8 +34,9 @@ public class EmployeeServiceImpl implements EmployeeService{
         empDto.setSal(sal);
         empDto.setComm(comm);
 
-        EmployeeDAO empDao = new EmployeeDAO();
+        EmployeeDtoValidator.validate(empDto);
 
+        EmployeeDAO empDao = new EmployeeDAO();
         System.out.println("Trying to save Employee Data");
         empDao.save(empDto);//Transfer data from Serv-DAO
         System.out.println("Employee Data Saved !!");
