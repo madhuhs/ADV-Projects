@@ -6,16 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class EmployeeDAO {
-    private final String dbUrl= "jdbc:mysql://localhost:3306/ems";
-    private final String user = "root";
-    private final String password = "root";
 
     public void save(EmployeDTO empDto)
     {
       String insertSql = "Insert into ems.emp values(0,?,?,?,?,?,?,null);";
         try
         {
-          Connection con = DriverManager.getConnection(dbUrl,user,password);
+            Connection con = DbConfig.getDbConnection();
             PreparedStatement psm1 = con.prepareStatement(insertSql);
 
             //set data
@@ -26,7 +23,6 @@ public class EmployeeDAO {
             psm1.setString(4, empDto.getHireDate());
             psm1.setInt(5, empDto.getSal());
             psm1.setInt(6, empDto.getComm());
-
             psm1.executeUpdate();//insert data to emp-table
 
         } catch (SQLException e) {
